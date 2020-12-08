@@ -54,13 +54,12 @@ class Game extends React.Component {
         // Estados servem para serem alterados depois da inicialização do componente
         this.state = {
             squares: Array(9).fill(null),
-            //squares: ['X', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X'],
-            nextMove: props.nextMove
+            nextMove: 'X'
         };
     }
 
     handleClick(index) {
-        console.log('Elemento clicado', index);
+        this.state.squares[index] = this.state.nextMove;
 
         let nextMove;
 
