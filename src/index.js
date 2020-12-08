@@ -12,7 +12,7 @@ function Square(props) {
 
 class Board extends React.Component {
     renderSquare(index) {
-        return <Square value={this.props.squares[index]} onClick=""/>;
+        return <Square value={this.props.squares[index]} onClick={() => this.props.onClick(index)}/>;
     }
 
     render() {
@@ -53,13 +53,15 @@ class Game extends React.Component {
         // Declaração do estado inicial com um objeto inicial
         // Estados servem para serem alterados depois da inicialização do componente
         this.state = {
-            //squares: Array(9).fill(null),
-            squares: ['X', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X'],
+            squares: Array(9).fill(null),
+            //squares: ['X', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X'],
             nextMove: props.nextMove
         };
     }
 
-    clique() {
+    handleClick(index) {
+        console.log('Elemento clicado', index);
+
         let nextMove;
 
         if (this.state.nextMove === 'X') {
@@ -78,7 +80,7 @@ class Game extends React.Component {
         return (
             <div className="game">
                 <div className="game-board">
-                    <Board squares={this.state.squares}/>
+                    <Board squares={this.state.squares} onClick={(i) => this.handleClick(i)}/>
                 </div>
 
                 <div className="game-info">
