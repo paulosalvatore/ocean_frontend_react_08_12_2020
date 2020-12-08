@@ -141,6 +141,8 @@ function calculateWinner(squares) {
             return true;
         }
     }
+
+    return false;
     */
 
     return lines.some(([a, b, c]) => squares[a] && squares[a] === squares[b] && squares[a] === squares[c]);
