@@ -10,26 +10,32 @@ function Square(props) {
     );
 }
 
-function Board(props) {
-    return (
-        <div>
-            <div className="board-row">
-                <Square/>
-                <Square/>
-                <Square/>
+class Board extends React.Component {
+    renderSquare(index) {
+        return <Square value={this.props.squares[index]} onClick=""/>;
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="board-row">
+                    {this.renderSquare(0)}
+                    {this.renderSquare(1)}
+                    {this.renderSquare(2)}
+                </div>
+                <div className="board-row">
+                    {this.renderSquare(3)}
+                    {this.renderSquare(4)}
+                    {this.renderSquare(5)}
+                </div>
+                <div className="board-row">
+                    {this.renderSquare(6)}
+                    {this.renderSquare(7)}
+                    {this.renderSquare(8)}
+                </div>
             </div>
-            <div className="board-row">
-                <Square/>
-                <Square/>
-                <Square/>
-            </div>
-            <div className="board-row">
-                <Square/>
-                <Square/>
-                <Square/>
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 class Game extends React.Component {
@@ -47,6 +53,8 @@ class Game extends React.Component {
         // Declaração do estado inicial com um objeto inicial
         // Estados servem para serem alterados depois da inicialização do componente
         this.state = {
+            //squares: Array(9).fill(null),
+            squares: ['X', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X'],
             nextMove: props.nextMove
         };
     }
@@ -70,7 +78,7 @@ class Game extends React.Component {
         return (
             <div className="game">
                 <div className="game-board">
-                    <Board/>
+                    <Board squares={this.state.squares}/>
                 </div>
 
                 <div className="game-info">
