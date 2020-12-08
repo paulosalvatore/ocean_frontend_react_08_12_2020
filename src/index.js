@@ -67,6 +67,10 @@ class Game extends React.Component {
 
         squares[index] = this.state.nextMove;
 
+        const isWinner = calculateWinner(squares);
+
+        console.log({isWinner});
+
         const nextMove = this.state.nextMove === 'X' ? 'O' : 'X';
 
         // Atualiza o estado do componente, passando um novo objeto para ele
@@ -94,3 +98,30 @@ ReactDOM.render(
     // Local em que esse elemento será renderizado
     document.getElementById('root')
 );
+
+function calculateWinner(squares) {
+    const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+
+        const a = line[0];
+        const b = line[1];
+        const c = line[2];
+
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            return true;
+        }
+    }
+
+    return false;
+}
