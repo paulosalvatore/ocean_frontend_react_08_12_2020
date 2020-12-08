@@ -73,6 +73,13 @@ class Game extends React.Component {
         this.setState({ nextMove });
     }
 
+    restartGame() {
+        this.setState({
+            squares: Array(9).fill(null),
+            nextMove: 'X'
+        });
+    }
+
     render() {
         const squares = this.state.squares;
 
@@ -96,7 +103,9 @@ class Game extends React.Component {
                 <div className="game-info">
                     {!hasWinner && !draw ? 'Próxima jogada: ' + nextMove : ''}
                     {hasWinner ? winner + ' venceu!!' : ''}
-                    {draw ? 'Deu velha!!' : ''}
+                    {draw ? 'Deu velha!!' : ''}<br/>
+                    <br/>
+                    <button onClick={() => this.restartGame()}>Reiniciar jogo</button>
                 </div>
             </div>
         );
