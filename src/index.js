@@ -61,18 +61,10 @@ class Game extends React.Component {
     handleClick(index) {
         this.state.squares[index] = this.state.nextMove;
 
-        let nextMove;
-
-        if (this.state.nextMove === 'X') {
-            nextMove = 'O';
-        } else {
-            nextMove = 'X';
-        }
+        const nextMove = this.state.nextMove === 'X' ? 'O' : 'X';
 
         // Atualiza o estado do componente, passando um novo objeto para ele
-        this.setState({
-            nextMove: nextMove
-        });
+        this.setState({ nextMove });
     }
 
     render() {
