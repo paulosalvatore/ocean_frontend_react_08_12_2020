@@ -61,15 +61,11 @@ class Game extends React.Component {
     handleClick(index) {
         const squares = this.state.squares;
 
-        if (squares[index]) {
+        if (squares[index] || calculateWinner(squares)) {
             return;
         }
 
         squares[index] = this.state.nextMove;
-
-        const isWinner = calculateWinner(squares);
-
-        console.log({isWinner});
 
         const nextMove = this.state.nextMove === 'X' ? 'O' : 'X';
 
@@ -78,6 +74,19 @@ class Game extends React.Component {
     }
 
     render() {
+        const squares = this.state.squares;
+
+        // Next Move
+        const nextMove = this.state.nextMove;
+
+        // Winner
+        const hasWinner = calculateWinner(squares);
+        const winner = nextMove === 'X' ? 'O': 'X';
+
+        // Draw
+        const filledSquares = squares.filter(Boolean);
+        const draw = !hasWinner && filledSquares.length === squares.length;
+
         return (
             <div className="game">
                 <div className="game-board">
@@ -85,7 +94,9 @@ class Game extends React.Component {
                 </div>
 
                 <div className="game-info">
-                    Info
+                    {!hasWinner && !draw ? 'Próxima jogada: ' + nextMove : ''}
+                    {hasWinner ? winner + ' venceu!!' : ''}
+                    {draw ? 'Deu velha!!' : ''}
                 </div>
             </div>
         );
